@@ -253,6 +253,33 @@ VALUES
 ('SACH456780', N'Giải Mã Giấc Mơ', 'SACH', 230000.00, 'NCC01'),
 ('SACH567891', N'Truy Tìm Vũ Trụ', 'SACH', 240000.00, 'NCC01');
 
+-- Thêm 20 sản phẩm mới thuộc thể loại Sách (SACH) với nhà cung cấp NCC01
+INSERT INTO SanPham (maSanPham, tenSanPham, maTheLoai, gia, maNhaCungCap)
+VALUES 
+('SACH678902', N'Bí Ẩn Vũ Trụ', 'SACH', 250000.00, 'NCC01'),
+('SACH789013', N'Cuộc Cách Mạng Công Nghệ 4.0', 'SACH', 220000.00, 'NCC01'),
+('SACH890124', N'Bách Khoa Toàn Thư', 'SACH', 300000.00, 'NCC01'),
+('SACH901235', N'Nghệ Thuật Giao Tiếp', 'SACH', 180000.00, 'NCC01'),
+('SACH012346', N'Tư Duy Đột Phá', 'SACH', 210000.00, 'NCC01'),
+('SACH123458', N'Hành Trình Về Phương Đông', 'SACH', 170000.00, 'NCC01'),
+('SACH234569', N'Thế Giới Phẳng', 'SACH', 240000.00, 'NCC01'),
+('SACH345680', N'Tâm Lý Học Hành Vi', 'SACH', 230000.00, 'NCC01'),
+('SACH456781', N'Văn Học Dân Gian Việt Nam', 'SACH', 160000.00, 'NCC01'),
+('SACH567892', N'Kinh Tế Học Cơ Bản', 'SACH', 250000.00, 'NCC01'),
+('SACH678903', N'Sức Mạnh Tiềm Thức', 'SACH', 190000.00, 'NCC01'),
+('SACH789014', N'Bí Quyết Thành Công', 'SACH', 200000.00, 'NCC01'),
+('SACH890125', N'Bách Khoa Trẻ Em', 'SACH', 280000.00, 'NCC01'),
+('SACH901236', N'Văn Hóa Và Đời Sống', 'SACH', 150000.00, 'NCC01'),
+('SACH012347', N'Giải Mã Con Người', 'SACH', 220000.00, 'NCC01'),
+('SACH123459', N'Triết Học Phương Tây', 'SACH', 270000.00, 'NCC01'),
+('SACH234570', N'Triết Học Phương Đông', 'SACH', 260000.00, 'NCC01'),
+('SACH345681', N'Chiến Lược Kinh Doanh', 'SACH', 290000.00, 'NCC01'),
+('SACH456782', N'Chinh Phục Mục Tiêu', 'SACH', 240000.00, 'NCC01'),
+('SACH567893', N'Lập Trình Cho Người Mới Bắt Đầu', 'SACH', 180000.00, 'NCC01');
+
+
+
+
 -- Thể loại Dụng cụ học tập
 INSERT INTO SanPham (maSanPham, tenSanPham, maTheLoai, gia, maNhaCungCap)
 VALUES 
@@ -276,6 +303,31 @@ VALUES
 ('DCHT889900', N'Hộp Màu Nước', 'DCHT', 30000.00, 'NCC02'),
 ('DCHT990011', N'Bút Xóa', 'DCHT', 5000.50, 'NCC02'),
 ('DCHT101112', N'Giấy In A4', 'DCHT', 35000.00, 'NCC02');
+
+-- Thêm 20 sản phẩm mới thuộc thể loại Dụng cụ học tập (DCHT) với nhà cung cấp NCC02
+INSERT INTO SanPham (maSanPham, tenSanPham, maTheLoai, gia, maNhaCungCap)
+VALUES 
+('DCHT102113', N'Tập Vẽ', 'DCHT', 15000.00, 'NCC02'),
+('DCHT103214', N'Mực Viết Máy', 'DCHT', 12000.00, 'NCC02'),
+('DCHT104315', N'Bút Lông Kim', 'DCHT', 8000.00, 'NCC02'),
+('DCHT105416', N'Thước Đo Độ', 'DCHT', 5000.00, 'NCC02'),
+('DCHT106517', N'Bút Sáp Màu', 'DCHT', 25000.00, 'NCC02'),
+('DCHT107618', N'Bảng Từ Trắng', 'DCHT', 40000.00, 'NCC02'),
+('DCHT108719', N'Giấy Ghi Chép', 'DCHT', 6000.00, 'NCC02'),
+('DCHT109820', N'Túi Đựng Bút', 'DCHT', 10000.00, 'NCC02'),
+('DCHT110921', N'Bút Dạ Bảng', 'DCHT', 9000.00, 'NCC02'),
+('DCHT111022', N'Keo Xịt Dán', 'DCHT', 12000.00, 'NCC02'),
+('DCHT112123', N'Sổ Tay Mini', 'DCHT', 7000.00, 'NCC02'),
+('DCHT113224', N'Hộp Mực Dấu', 'DCHT', 15000.00, 'NCC02'),
+('DCHT114325', N'Giấy Note Dán', 'DCHT', 5000.00, 'NCC02'),
+('DCHT115426', N'Bút Bi Đỏ', 'DCHT', 4000.00, 'NCC02'),
+('DCHT116527', N'Bút Bi Xanh', 'DCHT', 4000.00, 'NCC02'),
+('DCHT117628', N'Bút Lông Bảng', 'DCHT', 10000.00, 'NCC02'),
+('DCHT118729', N'Tập Kẻ Ô Ly', 'DCHT', 8000.00, 'NCC02'),
+('DCHT119830', N'Hộp Bút Gỗ', 'DCHT', 20000.00, 'NCC02'),
+('DCHT120931', N'Bìa Hồ Sơ', 'DCHT', 11000.00, 'NCC02'),
+('DCHT121032', N'Giấy Can', 'DCHT', 18000.00, 'NCC02');
+
 
 
 -- Thể loại Truyện
@@ -302,6 +354,19 @@ VALUES
 ('TRUYEN990011', N'Truyện Tranh Trinh Thám', 'TRUYEN', 34000.00, 'NCC01'),
 ('TRUYEN101112', N'Truyện Tranh Siêu Anh Hùng', 'TRUYEN', 30000.00, 'NCC01');
 
+INSERT INTO SanPham (maSanPham, tenSanPham, maTheLoai, gia, maNhaCungCap)
+VALUES 
+('TRUYEN102113', N'Truyện Cổ Tích Andersen', 'TRUYEN', 25000.00, 'NCC01'),
+('TRUYEN103214', N'One Piece Tập 7', 'TRUYEN', 32000.00, 'NCC01'),
+('TRUYEN104315', N'Truyện Ngụ Ngôn Việt Nam', 'TRUYEN', 27000.00, 'NCC01'),
+('TRUYEN105416', N'Truyện Ngắn Nguyễn Nhật Ánh', 'TRUYEN', 35000.00, 'NCC01'),
+('TRUYEN106517', N'Bảy Viên Ngọc Rồng Tập 6', 'TRUYEN', 34000.00, 'NCC01'),
+('TRUYEN107618', N'Truyện Tranh Kinh Dị Phương Tây', 'TRUYEN', 30000.00, 'NCC01'),
+('TRUYEN108719', N'Truyện Tranh Đen Trắng', 'TRUYEN', 28000.00, 'NCC01'),
+('TRUYEN109820', N'Truyện Thiếu Nhi Nhật Bản', 'TRUYEN', 26000.00, 'NCC01'),
+('TRUYEN110921', N'Truyện Tranh Hành Động', 'TRUYEN', 29000.00, 'NCC01'),
+('TRUYEN111022', N'Truyện Tranh Tâm Lý Xã Hội', 'TRUYEN', 31000.00, 'NCC01')
+
 
 -- Thể loại Thiết bị công nghệ
 INSERT INTO SanPham (maSanPham, tenSanPham, maTheLoai, gia, maNhaCungCap)
@@ -326,6 +391,21 @@ VALUES
 ('TBCN889900', N'Loa Di Động Bose', 'TBCN', 250000.00, 'NCC03'),
 ('TBCN990011', N'Sạc Nhanh Aukey', 'TBCN', 40000.00, 'NCC03'),
 ('TBCN101112', N'Tai Nghe Gaming HyperX', 'TBCN', 100000.00, 'NCC03');
+
+-- Thêm 10 sản phẩm mới thuộc thể loại Thiết bị công nghệ (TBCN) với nhà cung cấp NCC03
+INSERT INTO SanPham (maSanPham, tenSanPham, maTheLoai, gia, maNhaCungCap)
+VALUES 
+('TBCN111213', N'Micro Không Dây Shure', 'TBCN', 200000.00, 'NCC03'),
+('TBCN121314', N'Bộ Phát WiFi Mesh Asus', 'TBCN', 300000.00, 'NCC03'),
+('TBCN131415', N'Ổ SSD Samsung 1TB', 'TBCN', 400000.00, 'NCC03'),
+('TBCN141516', N'Màn Hình Cong Samsung 27 inch', 'TBCN', 700000.00, 'NCC03'),
+('TBCN151617', N'Bộ Loa Vi Tính Logitech', 'TBCN', 150000.00, 'NCC03'),
+('TBCN161718', N'Webcam Logitech Full HD', 'TBCN', 120000.00, 'NCC03'),
+('TBCN171819', N'Bàn Di Chuột RGB Corsair', 'TBCN', 50000.00, 'NCC03'),
+('TBCN181920', N'Ổ Cứng Di Động WD 2TB', 'TBCN', 350000.00, 'NCC03'),
+('TBCN192021', N'Máy Quét Mã Vạch Honeywell', 'TBCN', 250000.00, 'NCC03'),
+('TBCN202122', N'Micro Thu Âm Rode NT1-A', 'TBCN', 450000.00, 'NCC03');
+
 
 
 -- Thể loại Tạp chí và báo
@@ -352,6 +432,22 @@ VALUES
 ('TCVB990011', N'Tạp Chí Đời Sống Gia Đình', 'TCVB', 35000.00, 'NCC05'),
 ('TCVB101112', N'Tạp Chí Du Lịch', 'TCVB', 60000.00, 'NCC05');
 
+-- Thêm 10 sản phẩm mới thuộc thể loại Tạp chí và báo (TCVB) với nhà cung cấp NCC05
+INSERT INTO SanPham (maSanPham, tenSanPham, maTheLoai, gia, maNhaCungCap)
+VALUES 
+('TCVB111213', N'Tạp Chí Doanh Nhân', 'TCVB', 55000.00, 'NCC05'),
+('TCVB121314', N'Báo Khoa Học & Công Nghệ', 'TCVB', 18000.00, 'NCC05'),
+('TCVB131415', N'Tạp Chí Văn Nghệ Trẻ', 'TCVB', 48000.00, 'NCC05'),
+('TCVB141516', N'Báo Nông Nghiệp Việt Nam', 'TCVB', 20000.00, 'NCC05'),
+('TCVB151617', N'Tạp Chí Môi Trường & Đô Thị', 'TCVB', 65000.00, 'NCC05'),
+('TCVB161718', N'Báo Pháp Luật', 'TCVB', 15000.00, 'NCC05'),
+('TCVB171819', N'Tạp Chí Kinh Tế Quốc Tế', 'TCVB', 70000.00, 'NCC05'),
+('TCVB181920', N'Tạp Chí Ẩm Thực', 'TCVB', 35000.00, 'NCC05'),
+('TCVB192021', N'Báo Tiền Phong', 'TCVB', 14000.00, 'NCC05'),
+('TCVB202122', N'Tạp Chí Nghệ Thuật Sân Khấu', 'TCVB', 50000.00, 'NCC05');
+
+
+
 
 -- Thể loại Đồ chơi giáo dục
 INSERT INTO SanPham (maSanPham, tenSanPham, maTheLoai, gia, maNhaCungCap)
@@ -376,6 +472,20 @@ VALUES
 ('DCGD889900', N'Bộ Đồ Chơi Thám Hiểm', 'DCGD', 220000.00, 'NCC04'),
 ('DCGD990011', N'Bộ Đồ Chơi Xếp Gạch', 'DCGD', 130000.00, 'NCC04'),
 ('DCGD101112', N'Bộ Đồ Chơi Nấu Ăn', 'DCGD', 150000.00, 'NCC04');
+
+-- Thêm 10 sản phẩm mới thuộc thể loại Đồ chơi giáo dục (DCGD) với nhà cung cấp NCC04
+INSERT INTO SanPham (maSanPham, tenSanPham, maTheLoai, gia, maNhaCungCap)
+VALUES 
+('DCGD111213', N'Bộ Đồ Chơi Học Chữ Cái', 'DCGD', 100000.00, 'NCC04'),
+('DCGD121314', N'Bộ Đồ Chơi Toán Học', 'DCGD', 120000.00, 'NCC04'),
+('DCGD131415', N'Bộ Đồ Chơi Lắp Ghép Cơ Khí', 'DCGD', 250000.00, 'NCC04'),
+('DCGD141516', N'Bộ Đồ Chơi Khoa Học Vũ Trụ', 'DCGD', 350000.00, 'NCC04'),
+('DCGD151617', N'Bộ Đồ Chơi Tranh Ghép Hình Động Vật', 'DCGD', 180000.00, 'NCC04'),
+('DCGD161718', N'Bộ Đồ Chơi Lập Trình Robot', 'DCGD', 400000.00, 'NCC04'),
+('DCGD171819', N'Bộ Đồ Chơi Nhạc Cụ Mini', 'DCGD', 160000.00, 'NCC04'),
+('DCGD181920', N'Bộ Đồ Chơi Sáng Tạo Nghệ Thuật', 'DCGD', 200000.00, 'NCC04'),
+('DCGD192021', N'Bộ Đồ Chơi Định Hình Nghề Nghiệp', 'DCGD', 220000.00, 'NCC04'),
+('DCGD202122', N'Bộ Đồ Chơi Kỹ Năng Sống', 'DCGD', 140000.00, 'NCC04');
 
 
 -- Thêm thông tin khách hàng

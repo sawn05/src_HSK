@@ -184,6 +184,8 @@ namespace Test.FormChild
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(217, 26);
             this.txtTimKiem.TabIndex = 2;
+            this.txtTimKiem.Text = " Nhập từ khóa....";
+            this.txtTimKiem.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtTimKiem_MouseClick);
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // label6

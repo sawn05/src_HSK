@@ -12,13 +12,16 @@ namespace Test
 {
     public partial class Home : Form
     {
-        private Form activeForm = null; 
-        
+        private Form activeForm = null;
+        private static string maNvBanHang = "";
 
-        public Home()
+        public Home(string tenNV, string maNhanVien)
         {
             InitializeComponent();
             productDesign();
+
+            lbTenNVBanHang.Text = "Xin chào: " + tenNV;
+            maNvBanHang = maNhanVien;
         }
 
         private void productDesign()
@@ -84,6 +87,12 @@ namespace Test
         {
             this.Text = string.Empty;
             this.ControlBox = false;
+
+            if (maNvBanHang != "NV001")
+            {
+                btnNhanVien.Visible = false;
+                btnNhapHang.Visible = false;
+            }
         }
 
         private void Reset()
@@ -108,7 +117,7 @@ namespace Test
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void btnMaximize_Click(object sender, EventArgs e)
@@ -213,13 +222,13 @@ namespace Test
             lbTitle.Text = "Giỏ hàng";
             ResetButtonColors();
             btnGioHang.BackColor = Color.FromArgb(156, 197, 199);
-            OpenChildForm(new FormChild.GioHang());
+            OpenChildForm(new FormChild.GioHang(maNvBanHang));
         }
 
         private void btnNhanVien_Click(object sender, EventArgs e)
         {
             anSanPham();
-            lbTitle.Text = "Nhân viên";
+            lbTitle.Text = "Danh sách nhân viên";
             ResetButtonColors();
             btnNhanVien.BackColor = Color.FromArgb(156, 197, 199);
             OpenChildForm(new FormChild.NhanVien());
@@ -228,7 +237,7 @@ namespace Test
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
             anSanPham();
-            lbTitle.Text = "Khách hàng";
+            lbTitle.Text = "Danh sách khách hàng";
             ResetButtonColors();
             btnKhachHang.BackColor = Color.FromArgb(156, 197, 199);
             OpenChildForm(new FormChild.KhachHang());
@@ -242,10 +251,21 @@ namespace Test
         private void btnTKHoaDon_Click(object sender, EventArgs e)
         {
             anSanPham();
-            lbTitle.Text = "Thống kê";
+            lbTitle.Text = "Danh sách hóa đơn";
             ResetButtonColors();
             btnTKHoaDon.BackColor = Color.FromArgb(156, 197, 199);
             OpenChildForm(new FormChild.ThongKeHD());
+        }
+
+        private void btnDangXuat_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?",
+                                                          "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 

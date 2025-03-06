@@ -23,7 +23,7 @@ namespace Test.FormChild
         private void DungCuHocTap_Load(object sender, EventArgs e)
         {
             FormChild.Sach frmSach = new FormChild.Sach();
-            frmSach.SetPlaceholder(txtTimKiem, " Nhập từ khóa....");
+            //frmSach.SetPlaceholder(txtTimKiem, " Nhập từ khóa....");
 
             cbbTimKiem.Text = "Tên dụng cụ";
 
@@ -346,6 +346,11 @@ namespace Test.FormChild
             {
                 connectionSQL.close();
             }
+        }
+
+        private void txtTimKiem_MouseClick(object sender, MouseEventArgs e)
+        {
+            txtTimKiem.Text = "";
         }
     }
 }

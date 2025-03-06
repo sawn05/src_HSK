@@ -24,7 +24,6 @@ namespace Test.FormChild
         private void DoChoiGD_Load(object sender, EventArgs e)
         {
             FormChild.Sach frmSach = new FormChild.Sach();
-            frmSach.SetPlaceholder(txtTimKiem, " Nhập từ khóa....");
 
             cbbTimKiem.Text = "Tên sản phẩm";
 
@@ -350,6 +349,11 @@ namespace Test.FormChild
             {
                 connectionSQL.close();
             }
+        }
+
+        private void txtTimKiem_MouseClick(object sender, MouseEventArgs e)
+        {
+            txtTimKiem.Text = "";
         }
     }
 }

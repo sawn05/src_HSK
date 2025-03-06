@@ -63,3 +63,5 @@ C:\Users\Sángg\Documents\HSK\Test\Test\bin\Debug\CrystalDecisions.ReportAppServ
 C:\Users\Sángg\Documents\HSK\Test\Test\bin\Debug\stdole.dll
 C:\Users\Sángg\Documents\HSK\Test\Test\obj\Debug\Test.frmPhieuNhap.FormInRptNhapHang.resources
 C:\Users\Sángg\Documents\HSK\Test\Test\obj\Debug\Test.frmHoaDon.FormInRptHD.resources
+C:\Users\Sángg\Documents\HSK\Test\Test\obj\Debug\Test.FrmDangNhap.resources
+C:\Users\Sángg\Documents\HSK\Test\Test\obj\Debug\Test.FrmDangKy.resources

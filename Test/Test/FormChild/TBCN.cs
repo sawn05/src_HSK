@@ -37,7 +37,6 @@ namespace Test.FormChild
             loadDataTBCN();
 
             FormChild.Sach frmSach = new FormChild.Sach();
-            frmSach.SetPlaceholder(txtTimKiem, " Nhập từ khóa....");
 
             cbbTimKiem.Text = "Tên thiết bị";
 
@@ -344,6 +343,11 @@ namespace Test.FormChild
             {
                 connectionSQL.close();
             }
+        }
+
+        private void txtTimKiem_MouseClick(object sender, MouseEventArgs e)
+        {
+            txtTimKiem.Text = "";
         }
     }
 }

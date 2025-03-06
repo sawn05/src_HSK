@@ -150,7 +150,7 @@ namespace Test.FormChild
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return "0"; 
+                return "0";
             }
             finally
             {
@@ -314,5 +314,85 @@ namespace Test.FormChild
             chiTietHD.Show();
         }
 
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (dgvHoaDon.CurrentCell != null)
+            {
+                int rowIndex = dgvHoaDon.CurrentCell.RowIndex;
+
+                if (dgvHoaDon.Rows[rowIndex].IsNewRow || dgvHoaDon.Rows[rowIndex].Cells[0].Value == null)
+                {
+                    MessageBox.Show("Vui lòng chọn hóa đơn hợp lệ!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string maHD = dgvHoaDon.Rows[rowIndex].Cells[0].Value.ToString();
+
+                try
+                {
+                    connectionSQL.open();
+
+                    DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa hóa đơn này?", "Xác nhận xóa",
+                                                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
+
+                    // Kiểm tra phiếu nhập có tồn tại không trước khi xóa
+                    string sqlCheckNH = "SELECT COUNT(*) FROM HoaDon WHERE maHD = @maHD";
+                    using (SqlCommand cmdCheck = new SqlCommand(sqlCheckNH, connectionSQL.conn))
+                    {
+                        cmdCheck.Parameters.AddWithValue("@maHD", maHD);
+                        int count = Convert.ToInt32(cmdCheck.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            MessageBox.Show("Hóa đơn không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+
+                    using (SqlTransaction transaction = connectionSQL.conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Xóa chi tiết nhập hàng
+                            string sqlXoaCTNH = "DELETE FROM ChiTietDonHang WHERE maHD = @maHD";
+                            using (SqlCommand cmdCTDH = new SqlCommand(sqlXoaCTNH, connectionSQL.conn, transaction))
+                            {
+                                cmdCTDH.Parameters.AddWithValue("@maHD", maHD);
+                                cmdCTDH.ExecuteNonQuery();
+                            }
+
+                            // Xóa phiếu nhập
+                            string sqlXoaNH = "DELETE FROM HoaDon WHERE maHD = @maHD";
+                            using (SqlCommand cmdHD = new SqlCommand(sqlXoaNH, connectionSQL.conn, transaction))
+                            {
+                                cmdHD.Parameters.AddWithValue("@maHD", maHD);
+                                cmdHD.ExecuteNonQuery();
+                            }
+
+                            transaction.Commit();
+                            MessageBox.Show("Xóa hóa đơn thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ThongKeHD_Load(sender, e);
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("Lỗi khi xóa: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    connectionSQL.close();
+                }
+            }
+        }
     }
 }

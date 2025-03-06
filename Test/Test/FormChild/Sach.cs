@@ -56,7 +56,6 @@ namespace Test.FormChild
 
         private void Sach_Load(object sender, EventArgs e)
         {
-            SetPlaceholder(txtTimKiem, " Nhập từ khóa...");
             cbbTimKiem.Text = "Tên sách";
 
             // Load data sách
@@ -376,6 +375,11 @@ namespace Test.FormChild
             {
                 connectionSQL.close();
             }
+        }
+
+        private void txtTimKiem_MouseClick(object sender, MouseEventArgs e)
+        {
+            txtTimKiem.Text = "";
         }
     }
 }

@@ -49,8 +49,6 @@ namespace Test
             this.panelLogo = new System.Windows.Forms.Panel();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.panelTitle = new System.Windows.Forms.Panel();
-            this.btnDangKy = new System.Windows.Forms.Button();
-            this.btnDangNhap = new System.Windows.Forms.Button();
             this.lbTime = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnMaximize = new System.Windows.Forms.Button();
@@ -65,6 +63,8 @@ namespace Test
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSanPham = new System.Windows.Forms.Button();
             this.btnTBCN = new System.Windows.Forms.Button();
+            this.lbTenNVBanHang = new System.Windows.Forms.Label();
+            this.btnDangXuat = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.panelSanPham.SuspendLayout();
             this.panelDanhMuc.SuspendLayout();
@@ -94,6 +94,7 @@ namespace Test
             // panelSanPham
             // 
             this.panelSanPham.AutoScroll = true;
+            this.panelSanPham.Controls.Add(this.btnDangXuat);
             this.panelSanPham.Controls.Add(this.btnTKHoaDon);
             this.panelSanPham.Controls.Add(this.btnNhapHang);
             this.panelSanPham.Controls.Add(this.btnGioHang);
@@ -123,7 +124,7 @@ namespace Test
             this.btnTKHoaDon.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
             this.btnTKHoaDon.Size = new System.Drawing.Size(258, 76);
             this.btnTKHoaDon.TabIndex = 9;
-            this.btnTKHoaDon.Text = "  Thống kê";
+            this.btnTKHoaDon.Text = "  Hóa đơn";
             this.btnTKHoaDon.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTKHoaDon.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTKHoaDon.UseVisualStyleBackColor = true;
@@ -389,8 +390,7 @@ namespace Test
             // 
             this.panelTitle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(220)))), ((int)(((byte)(222)))));
-            this.panelTitle.Controls.Add(this.btnDangKy);
-            this.panelTitle.Controls.Add(this.btnDangNhap);
+            this.panelTitle.Controls.Add(this.lbTenNVBanHang);
             this.panelTitle.Controls.Add(this.lbTime);
             this.panelTitle.Controls.Add(this.btnClose);
             this.panelTitle.Controls.Add(this.btnMaximize);
@@ -404,32 +404,6 @@ namespace Test
             this.panelTitle.Name = "panelTitle";
             this.panelTitle.Size = new System.Drawing.Size(1109, 187);
             this.panelTitle.TabIndex = 2;
-            // 
-            // btnDangKy
-            // 
-            this.btnDangKy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDangKy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(220)))), ((int)(((byte)(222)))));
-            this.btnDangKy.FlatAppearance.BorderSize = 0;
-            this.btnDangKy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDangKy.Location = new System.Drawing.Point(910, 12);
-            this.btnDangKy.Name = "btnDangKy";
-            this.btnDangKy.Size = new System.Drawing.Size(87, 27);
-            this.btnDangKy.TabIndex = 4;
-            this.btnDangKy.Text = "ĐĂNG KÝ";
-            this.btnDangKy.UseVisualStyleBackColor = false;
-            // 
-            // btnDangNhap
-            // 
-            this.btnDangNhap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDangNhap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(220)))), ((int)(((byte)(222)))));
-            this.btnDangNhap.FlatAppearance.BorderSize = 0;
-            this.btnDangNhap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDangNhap.Location = new System.Drawing.Point(794, 12);
-            this.btnDangNhap.Name = "btnDangNhap";
-            this.btnDangNhap.Size = new System.Drawing.Size(110, 27);
-            this.btnDangNhap.TabIndex = 4;
-            this.btnDangNhap.Text = "ĐĂNG NHẬP";
-            this.btnDangNhap.UseVisualStyleBackColor = false;
             // 
             // lbTime
             // 
@@ -507,7 +481,7 @@ namespace Test
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.Location = new System.Drawing.Point(18, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 27);
+            this.button1.Size = new System.Drawing.Size(152, 27);
             this.button1.TabIndex = 0;
             this.button1.Text = " 19001178";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -523,7 +497,7 @@ namespace Test
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.Location = new System.Drawing.Point(358, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(455, 33);
+            this.button3.Size = new System.Drawing.Size(331, 33);
             this.button3.TabIndex = 2;
             this.button3.Text = "96 Định Công, Hoàng Mai, Hà Nội";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -624,6 +598,38 @@ namespace Test
             this.btnTBCN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTBCN.UseVisualStyleBackColor = true;
             // 
+            // lbTenNVBanHang
+            // 
+            this.lbTenNVBanHang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbTenNVBanHang.Enabled = false;
+            this.lbTenNVBanHang.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold);
+            this.lbTenNVBanHang.Location = new System.Drawing.Point(698, 7);
+            this.lbTenNVBanHang.Name = "lbTenNVBanHang";
+            this.lbTenNVBanHang.Size = new System.Drawing.Size(299, 30);
+            this.lbTenNVBanHang.TabIndex = 5;
+            this.lbTenNVBanHang.Text = "Tên nhân viên bán hàng";
+            this.lbTenNVBanHang.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnDangXuat
+            // 
+            this.btnDangXuat.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDangXuat.FlatAppearance.BorderSize = 0;
+            this.btnDangXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDangXuat.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnDangXuat.Image = ((System.Drawing.Image)(resources.GetObject("btnDangXuat.Image")));
+            this.btnDangXuat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDangXuat.Location = new System.Drawing.Point(0, 916);
+            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDangXuat.Name = "btnDangXuat";
+            this.btnDangXuat.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.btnDangXuat.Size = new System.Drawing.Size(258, 76);
+            this.btnDangXuat.TabIndex = 10;
+            this.btnDangXuat.Text = " Đăng xuất";
+            this.btnDangXuat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDangXuat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDangXuat.UseVisualStyleBackColor = true;
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -669,8 +675,6 @@ namespace Test
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnDangKy;
-        private System.Windows.Forms.Button btnDangNhap;
         private System.Windows.Forms.Label lbTime;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panelLeft;
@@ -691,5 +695,7 @@ namespace Test
         private System.Windows.Forms.Button btnNhanVien;
         private System.Windows.Forms.Button btnKhachHang;
         private System.Windows.Forms.Panel panelDanhMuc;
+        private System.Windows.Forms.Label lbTenNVBanHang;
+        private System.Windows.Forms.Button btnDangXuat;
     }
 }

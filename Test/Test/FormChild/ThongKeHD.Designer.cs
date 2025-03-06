@@ -37,6 +37,7 @@ namespace Test.FormChild
             this.btnXemChiTiet = new System.Windows.Forms.Button();
             this.btnXuatFileExcel = new System.Windows.Forms.Button();
             this.lbTongDoanhThu = new System.Windows.Forms.Label();
+            this.btnXoa = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +54,7 @@ namespace Test.FormChild
             this.groupBox1.Size = new System.Drawing.Size(1069, 426);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thống kê các hóa đơn tại cửa hàng";
+            this.groupBox1.Text = "Các hóa đơn tại cửa hàng";
             // 
             // dgvHoaDon
             // 
@@ -100,7 +101,7 @@ namespace Test.FormChild
             this.btnXemChiTiet.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnXemChiTiet.Image = ((System.Drawing.Image)(resources.GetObject("btnXemChiTiet.Image")));
             this.btnXemChiTiet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXemChiTiet.Location = new System.Drawing.Point(529, 482);
+            this.btnXemChiTiet.Location = new System.Drawing.Point(496, 482);
             this.btnXemChiTiet.Name = "btnXemChiTiet";
             this.btnXemChiTiet.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.btnXemChiTiet.Size = new System.Drawing.Size(165, 35);
@@ -120,7 +121,7 @@ namespace Test.FormChild
             this.btnXuatFileExcel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnXuatFileExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatFileExcel.Image")));
             this.btnXuatFileExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXuatFileExcel.Location = new System.Drawing.Point(727, 482);
+            this.btnXuatFileExcel.Location = new System.Drawing.Point(806, 482);
             this.btnXuatFileExcel.Name = "btnXuatFileExcel";
             this.btnXuatFileExcel.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.btnXuatFileExcel.Size = new System.Drawing.Size(192, 35);
@@ -136,11 +137,31 @@ namespace Test.FormChild
             this.lbTongDoanhThu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbTongDoanhThu.AutoSize = true;
             this.lbTongDoanhThu.Font = new System.Drawing.Font("Cascadia Code", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lbTongDoanhThu.Location = new System.Drawing.Point(62, 575);
+            this.lbTongDoanhThu.Location = new System.Drawing.Point(67, 551);
             this.lbTongDoanhThu.Name = "lbTongDoanhThu";
             this.lbTongDoanhThu.Size = new System.Drawing.Size(255, 35);
             this.lbTongDoanhThu.TabIndex = 3;
             this.lbTongDoanhThu.Text = "Tổng doanh thu:";
+            // 
+            // btnXoa
+            // 
+            this.btnXoa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnXoa.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnXoa.FlatAppearance.BorderSize = 0;
+            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXoa.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnXoa.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.Image")));
+            this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnXoa.Location = new System.Drawing.Point(688, 482);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.btnXoa.Size = new System.Drawing.Size(93, 35);
+            this.btnXoa.TabIndex = 14;
+            this.btnXoa.Text = " Xóa";
+            this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // ThongKeHD
             // 
@@ -148,6 +169,7 @@ namespace Test.FormChild
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1093, 651);
             this.Controls.Add(this.btnXuatFileExcel);
+            this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.btnXemChiTiet);
             this.Controls.Add(this.lbTongDoanhThu);
             this.Controls.Add(this.label6);
@@ -173,5 +195,6 @@ namespace Test.FormChild
         private System.Windows.Forms.Button btnXemChiTiet;
         private System.Windows.Forms.Button btnXuatFileExcel;
         private System.Windows.Forms.Label lbTongDoanhThu;
+        private System.Windows.Forms.Button btnXoa;
     }
 }

@@ -15,9 +15,11 @@ namespace Test.FormChild
     public partial class GioHang : Form
     {
         ConnectionSQL connectionSQL = new ConnectionSQL();
-        public GioHang()
+        string maNVBanHang = "";
+        public GioHang(string maNV)
         {
             InitializeComponent();
+            maNVBanHang = maNV;
         }
 
         private void GioHang_Load(object sender, EventArgs e)
@@ -528,7 +530,7 @@ namespace Test.FormChild
                     maKhachHang = dgvKhachHang.CurrentRow.Cells[0].Value.ToString();
                 }
 
-                string maNhanVien = "NV001";
+                string maNhanVien = maNVBanHang;
                 DateTime ngayLapHD = DateTime.Now;
                 decimal tongTien = Convert.ToDecimal(lbTongTienHang.Text);
                 string ghiChu = txtGhiChu.Text;

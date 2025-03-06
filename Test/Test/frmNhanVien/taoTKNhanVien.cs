@@ -60,6 +60,7 @@ namespace Test.frmNhanVien
         private void taoTK_Load(object sender, EventArgs e)
         {
             fillCBB();
+            cbbMaNV.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void btnDongY_Click(object sender, EventArgs e)
