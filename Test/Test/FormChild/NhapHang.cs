@@ -73,11 +73,11 @@ namespace Test.FormChild
             // Khởi tạo bảng sản phẩm
             initDgvSanPham();
 
-            FormChild.Sach frmSach = new FormChild.Sach();
+            Function frmSach = new Function();
             // Căn chỉnh table
-            frmSach.canChinhDGV(dgvSanPham);
-            frmSach.canChinhDGV(dgvTimKiem);
-            frmSach.canChinhDGV(dgvPhieuNhap);
+            frmSach.CanChinhDGV(dgvSanPham);
+            frmSach.CanChinhDGV(dgvTimKiem);
+            frmSach.CanChinhDGV(dgvPhieuNhap);
             dgvPhieuNhap.Columns["Ngày nhập"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSanPham.Columns["tenSP"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
@@ -559,9 +559,6 @@ namespace Test.FormChild
 
         private void btnNhapHang_Click(object sender, EventArgs e)
         {
-            // Kiểm tra mã phiếu có tồn tại không
-            string queryNV = "SELECT COUNT(*) FROM NhapHang WHERE maNhap = @maNhap";
-
             if (string.IsNullOrWhiteSpace(cbbMaPhieu.Text))
             {
                 MessageBox.Show("Vui lòng chọn mã phiếu nhập!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -577,20 +574,27 @@ namespace Test.FormChild
             try
             {
                 connectionSQL.open();
+                SqlTransaction transaction = connectionSQL.conn.BeginTransaction();
 
-                using (SqlCommand cmd = new SqlCommand(queryNV, connectionSQL.conn))
+                try
                 {
-                    cmd.Parameters.AddWithValue("@maNhap", cbbMaPhieu.Text);
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    string maNhap = cbbMaPhieu.Text;
 
-                    if (count == 0)
+                    // Kiểm tra mã phiếu có tồn tại không
+                    string queryCheckPhieu = "SELECT COUNT(*) FROM NhapHang WHERE maNhap = @maNhap";
+                    using (SqlCommand cmd = new SqlCommand(queryCheckPhieu, connectionSQL.conn, transaction))
                     {
-                        MessageBox.Show("Mã nhập không tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
+                        cmd.Parameters.AddWithValue("@maNhap", maNhap);
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        if (count == 0)
+                        {
+                            MessageBox.Show("Mã nhập không tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            transaction.Rollback();
+                            return;
+                        }
                     }
 
-                    // Nhập hàng
-                    string maNhap = cbbMaPhieu.Text;
                     int soLuongSanPham = 0;
 
                     foreach (DataGridViewRow row in dgvSanPham.Rows)
@@ -598,39 +602,46 @@ namespace Test.FormChild
                         if (row.Cells["maSP"].Value == null) continue;
 
                         string maSP = row.Cells["maSP"].Value.ToString();
-                        string soLuong = row.Cells["soLuong"].Value.ToString();
-                        string giaNhap = row.Cells["giaNhap"].Value.ToString();
+                        int soLuong = Convert.ToInt32(row.Cells["soLuong"].Value);
+                        decimal giaNhap = Convert.ToDecimal(row.Cells["giaNhap"].Value);
 
-                        // Thêm dữ liệu vào SQL
+                        // Thêm dữ liệu vào ChiTietNhapHang
                         string sqlInsert = "INSERT INTO ChiTietNhapHang(maNhap, maSanPham, soLuong, donGia) VALUES (@maNhap, @maSanPham, @soLuong, @donGia)";
-                        using (SqlCommand command = new SqlCommand(sqlInsert, connectionSQL.conn))
+                        using (SqlCommand cmd = new SqlCommand(sqlInsert, connectionSQL.conn, transaction))
                         {
-                            command.Parameters.AddWithValue("@maNhap", maNhap);
-                            command.Parameters.AddWithValue("@maSanPham", maSP);
-                            command.Parameters.AddWithValue("@soLuong", soLuong);
-                            command.Parameters.AddWithValue("@donGia", giaNhap);
-
-                            command.ExecuteNonQuery();
-                            soLuongSanPham += Convert.ToInt32(soLuong);
+                            cmd.Parameters.AddWithValue("@maNhap", maNhap);
+                            cmd.Parameters.AddWithValue("@maSanPham", maSP);
+                            cmd.Parameters.AddWithValue("@soLuong", soLuong);
+                            cmd.Parameters.AddWithValue("@donGia", giaNhap);
+                            cmd.ExecuteNonQuery();
                         }
+
+                        soLuongSanPham += soLuong;
                     }
 
                     if (soLuongSanPham > 0)
                     {
+                        transaction.Commit();
                         MessageBox.Show($"Nhập hàng thành công {soLuongSanPham} sản phẩm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         loadDataSanPham();
                     }
                 }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show("Lỗi nhập hàng: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi nhập hàng: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi kết nối: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 connectionSQL.close();
             }
         }
+
 
 
         private void btnXoaSP_Click(object sender, EventArgs e)
@@ -671,6 +682,39 @@ namespace Test.FormChild
         {
             frmPhieuNhap.DanhSachPhieuNhap ds = new frmPhieuNhap.DanhSachPhieuNhap();
             ds.Show();
+        }
+
+        private void cbbMaPhieu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                connectionSQL.open();
+                SqlTransaction transaction = connectionSQL.conn.BeginTransaction();
+
+                string queryCheckChiTiet = "SELECT COUNT(*) FROM ChiTietNhapHang WHERE maNhap = @maNhap";
+                using (SqlCommand cmd = new SqlCommand(queryCheckChiTiet, connectionSQL.conn, transaction))
+                {
+                    cmd.Parameters.AddWithValue("@maNhap", cbbMaPhieu.SelectedItem);
+                    int countCT = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    if (countCT > 0)
+                    {
+                        MessageBox.Show("Phiếu nhập này đã có sản phẩm, không thể nhập thêm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        cbbMaPhieu.Text = "";
+                        transaction.Rollback();
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kết nối: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connectionSQL.close();
+            }
+            
         }
     }
 }

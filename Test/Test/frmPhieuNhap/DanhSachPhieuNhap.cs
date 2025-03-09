@@ -63,8 +63,8 @@ namespace Test.frmPhieuNhap
 
             dgvSanPham.DataSource = connectionSQL.hienDL(sqlPhieuNhap);
 
-            FormChild.Sach frmSach = new FormChild.Sach();
-            frmSach.canChinhDGV(dgvSanPham);
+            Function frmSach = new Function();
+            frmSach.CanChinhDGV(dgvSanPham);
             dgvSanPham.Columns["Tên sản phẩm"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 

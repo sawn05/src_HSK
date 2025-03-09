@@ -213,7 +213,6 @@ namespace Test
             this.txtMatKhau.TabIndex = 5;
             this.txtMatKhau.Text = "Mật khẩu";
             this.txtMatKhau.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtMatKhau_MouseClick);
-            this.txtMatKhau.Enter += new System.EventHandler(this.txtMatKhau_Enter);
             this.txtMatKhau.Leave += new System.EventHandler(this.txtMatKhau_Leave);
             // 
             // txtTaiKhoan

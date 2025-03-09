@@ -24,7 +24,7 @@ namespace Test.FormChild
 
         private void GioHang_Load(object sender, EventArgs e)
         {
-            FormChild.Sach frmSach = new FormChild.Sach();
+            Function frmSach = new Function();
             frmSach.SetPlaceholder(txtGhiChu, " Ghi chú....");
 
             // Set dataGridView
@@ -45,15 +45,15 @@ namespace Test.FormChild
 
 
             // Căn chỉnh table
-            frmSach.canChinhDGV(dgvTimKiem);
+            frmSach.CanChinhDGV(dgvTimKiem);
 
             // Căn chỉnh table
-            frmSach.canChinhDGV(dgvKhachHang);
+            frmSach.CanChinhDGV(dgvKhachHang);
             dgvKhachHang.Columns["Tên KH"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvKhachHang.Columns["Địa chỉ"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             // Căn chỉnh table
-            frmSach.canChinhDGV(dgvSanPham);
+            frmSach.CanChinhDGV(dgvSanPham);
             dgvSanPham.Columns["Tên SP"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
@@ -356,16 +356,41 @@ namespace Test.FormChild
                         decimal.TryParse(dgvTimKiem.Rows[rowIndex].Cells[3].Value.ToString(), out donGia);
                     }
 
-
                     try
                     {
                         connectionSQL.open();
 
                         // Xác nhận trước khi thêm
-                        DialogResult result = MessageBox.Show($"Bạn có chắc chắn muốn thêm sản phẩm: {maSP} vào giỏ hàng?",
+                        DialogResult result = MessageBox.Show($"Bạn có chắc chắn muốn thêm sản phẩm: {tenSP} vào giỏ hàng?",
                                                               "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (result == DialogResult.No)
                         {
+                            return;
+                        }
+
+                        // Kiểm tra số lượng tồn kho
+                        int soLuongTon = 0;
+                        string queryTonKho = "SELECT soLuongTon FROM SanPham WHERE maSanPham = @maSP";
+
+                        using (SqlCommand cmdTonKho = new SqlCommand(queryTonKho, connectionSQL.conn))
+                        {
+                            cmdTonKho.Parameters.AddWithValue("@maSP", maSP);
+                            object result1 = cmdTonKho.ExecuteScalar();
+
+                            if (result1 != null && result1 != DBNull.Value)
+                            {
+                                soLuongTon = Convert.ToInt32(result1);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Sản phẩm không tồn tại trong kho!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                        }
+
+                        if (soLuongTon < slMua)
+                        {
+                            MessageBox.Show("Số lượng sản phẩm trong kho không đủ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
@@ -382,20 +407,17 @@ namespace Test.FormChild
                             insertCmd.ExecuteNonQuery();
                         }
 
-                        MessageBox.Show("Thêm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Thêm sản phẩm vào giỏ hàng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // Update tổng tiền hàng 
-                        tongTienHang();
+                        // Cập nhật lại các thông tin liên quan
+                        tongTienHang(); // Cập nhật tổng tiền hàng
+                        tienTraKhach(); // Cập nhật số tiền trả khách
+                        soLuongHang();  // Cập nhật tổng số lượng hàng
 
-                        // Update tiền trả khách
-                        tienTraKhach();
-
-                        // Update số lượng hàng
-                        soLuongHang();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Lỗi khi thêm sản phẩm vào giỏ: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {
@@ -409,7 +431,7 @@ namespace Test.FormChild
             }
             else
             {
-                MessageBox.Show("Vui lòng hiện danh sách sản phẩm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng hiển thị danh sách sản phẩm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

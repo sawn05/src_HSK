@@ -411,6 +411,7 @@ namespace Test.FormChild
             this.cbbMaPhieu.Name = "cbbMaPhieu";
             this.cbbMaPhieu.Size = new System.Drawing.Size(129, 29);
             this.cbbMaPhieu.TabIndex = 5;
+            this.cbbMaPhieu.SelectedIndexChanged += new System.EventHandler(this.cbbMaPhieu_SelectedIndexChanged);
             // 
             // label5
             // 

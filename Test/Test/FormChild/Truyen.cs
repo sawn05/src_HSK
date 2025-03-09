@@ -13,9 +13,11 @@ namespace Test.FormChild
 {
     public partial class Truyen : Form
     {
-        public Truyen()
+        string maNVBH;
+        public Truyen(string NVBH)
         {
             InitializeComponent();
+            maNVBH = NVBH;
         }
 
         ConnectionSQL connectionSQL = new ConnectionSQL();
@@ -36,14 +38,14 @@ namespace Test.FormChild
 
         private void Truyen_Load(object sender, EventArgs e)
         {
-            FormChild.Sach frmSach = new FormChild.Sach();
+            Function function = new Function();
 
             cbbTimKiem.Text = "Tên truyện";
 
             loadDataTruyen();
 
             // Căn chỉnh table
-            frmSach.canChinhDGV(dgvTruyen);
+            function.CanChinhDGV(dgvTruyen);
             dgvTruyen.Columns["Tên sản phẩm"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
@@ -139,6 +141,12 @@ namespace Test.FormChild
         {
             try
             {
+                if (maNVBH != "NV001")
+                {
+                    MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Kiểm tra rỗng
                 string maSanPham = txtMaTruyen.Text.Trim();
 
@@ -175,6 +183,12 @@ namespace Test.FormChild
         {
             try
             {
+                if (maNVBH != "NV001")
+                {
+                    MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string maSP = txtMaTruyen.Text.Trim();
 
                 if (string.IsNullOrEmpty(maSP))

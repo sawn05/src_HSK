@@ -13,23 +13,26 @@ namespace Test.FormChild
 {
     public partial class TCVB : Form
     {
-        public TCVB()
+
+        private string maNVBH;
+        public TCVB(string maNVBanHang)
         {
             InitializeComponent();
+            maNVBH = maNVBanHang;
         }
 
         ConnectionSQL connectionSQL = new ConnectionSQL();
 
         private void TCVB_Load(object sender, EventArgs e)
         {
-            FormChild.Sach frmSach = new FormChild.Sach();
+            Function function = new Function();
 
             cbbTimKiem.Text = "Tên sách";
 
             loadDataSach();
 
             // Căn chỉnh table
-            frmSach.canChinhDGV(dgvTCVB);
+            function.CanChinhDGV(dgvTCVB);
             dgvTCVB.Columns["Tên sản phẩm"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
@@ -138,6 +141,12 @@ namespace Test.FormChild
         {
             try
             {
+                if (maNVBH != "NV001")
+                {
+                    MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Kiểm tra rỗng
                 string maSanPham = txtMaSach.Text.Trim();
 
@@ -174,6 +183,12 @@ namespace Test.FormChild
         {
             try
             {
+                if (maNVBH != "NV001")
+                {
+                    MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string maSP = txtMaSach.Text.Trim();
 
                 if (string.IsNullOrEmpty(maSP))

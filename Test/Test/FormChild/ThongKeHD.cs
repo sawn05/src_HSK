@@ -18,17 +18,19 @@ namespace Test.FormChild
     {
         ConnectionSQL connectionSQL = new ConnectionSQL();
 
-        public ThongKeHD()
+        private string maNV;
+        public ThongKeHD(string maNVBanHang)
         {
             InitializeComponent();
+            maNV = maNVBanHang;
         }
 
         private void ThongKeHD_Load(object sender, EventArgs e)
         {
             loadDataHD();
 
-            FormChild.Sach frmSach = new FormChild.Sach();
-            frmSach.canChinhDGV(dgvHoaDon);
+            Function frmSach = new Function();
+            frmSach.CanChinhDGV(dgvHoaDon);
             dgvHoaDon.Columns["Ngày lập"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvHoaDon.Columns["Tổng tiền"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvHoaDon.Columns["Ghi chú"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -316,6 +318,12 @@ namespace Test.FormChild
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            if (maNV != "NV001")
+            {
+                MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (dgvHoaDon.CurrentCell != null)
             {
                 int rowIndex = dgvHoaDon.CurrentCell.RowIndex;

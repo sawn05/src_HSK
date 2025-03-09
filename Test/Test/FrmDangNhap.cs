@@ -53,7 +53,7 @@ namespace Test
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTaiKhoan.Text) || string.IsNullOrEmpty(txtMatKhau.Text) || txtMatKhau.Text.Trim() == "Mật khẩu"
-    || txtTaiKhoan.Text.Trim() == "Tài khoản")
+                || txtTaiKhoan.Text.Trim() == "Tài khoản")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin tài khoản và mật khẩu của bạn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -130,17 +130,6 @@ namespace Test
             else
             {
                 txtMatKhau.PasswordChar = '\0';
-            }
-        }
-
-
-        private void txtMatKhau_Enter(object sender, EventArgs e)
-        {
-            if (txtMatKhau.Text == "Mật khẩu")
-            {
-                txtMatKhau.Text = "";
-                txtMatKhau.PasswordChar = '*';
-                txtMatKhau.ForeColor = Color.FromArgb(38, 65, 94);
             }
         }
 

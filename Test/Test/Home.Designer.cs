@@ -33,6 +33,7 @@ namespace Test
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.panelLeft = new System.Windows.Forms.Panel();
             this.panelSanPham = new System.Windows.Forms.Panel();
+            this.btnDangXuat = new System.Windows.Forms.Button();
             this.btnTKHoaDon = new System.Windows.Forms.Button();
             this.btnNhapHang = new System.Windows.Forms.Button();
             this.btnGioHang = new System.Windows.Forms.Button();
@@ -49,6 +50,7 @@ namespace Test
             this.panelLogo = new System.Windows.Forms.Panel();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.panelTitle = new System.Windows.Forms.Panel();
+            this.lbTenNVBanHang = new System.Windows.Forms.Label();
             this.lbTime = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnMaximize = new System.Windows.Forms.Button();
@@ -63,8 +65,6 @@ namespace Test
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSanPham = new System.Windows.Forms.Button();
             this.btnTBCN = new System.Windows.Forms.Button();
-            this.lbTenNVBanHang = new System.Windows.Forms.Label();
-            this.btnDangXuat = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.panelSanPham.SuspendLayout();
             this.panelDanhMuc.SuspendLayout();
@@ -109,6 +109,26 @@ namespace Test
             this.panelSanPham.Name = "panelSanPham";
             this.panelSanPham.Size = new System.Drawing.Size(275, 690);
             this.panelSanPham.TabIndex = 2;
+            // 
+            // btnDangXuat
+            // 
+            this.btnDangXuat.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDangXuat.FlatAppearance.BorderSize = 0;
+            this.btnDangXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDangXuat.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnDangXuat.Image = ((System.Drawing.Image)(resources.GetObject("btnDangXuat.Image")));
+            this.btnDangXuat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDangXuat.Location = new System.Drawing.Point(0, 916);
+            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDangXuat.Name = "btnDangXuat";
+            this.btnDangXuat.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.btnDangXuat.Size = new System.Drawing.Size(258, 76);
+            this.btnDangXuat.TabIndex = 10;
+            this.btnDangXuat.Text = " Đăng xuất";
+            this.btnDangXuat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDangXuat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDangXuat.UseVisualStyleBackColor = true;
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
             // btnTKHoaDon
             // 
@@ -405,6 +425,18 @@ namespace Test
             this.panelTitle.Size = new System.Drawing.Size(1109, 187);
             this.panelTitle.TabIndex = 2;
             // 
+            // lbTenNVBanHang
+            // 
+            this.lbTenNVBanHang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbTenNVBanHang.Enabled = false;
+            this.lbTenNVBanHang.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold);
+            this.lbTenNVBanHang.Location = new System.Drawing.Point(698, 7);
+            this.lbTenNVBanHang.Name = "lbTenNVBanHang";
+            this.lbTenNVBanHang.Size = new System.Drawing.Size(299, 30);
+            this.lbTenNVBanHang.TabIndex = 5;
+            this.lbTenNVBanHang.Text = "Tên nhân viên bán hàng";
+            this.lbTenNVBanHang.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // lbTime
             // 
             this.lbTime.AutoSize = true;
@@ -597,38 +629,6 @@ namespace Test
             this.btnTBCN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTBCN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTBCN.UseVisualStyleBackColor = true;
-            // 
-            // lbTenNVBanHang
-            // 
-            this.lbTenNVBanHang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbTenNVBanHang.Enabled = false;
-            this.lbTenNVBanHang.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold);
-            this.lbTenNVBanHang.Location = new System.Drawing.Point(698, 7);
-            this.lbTenNVBanHang.Name = "lbTenNVBanHang";
-            this.lbTenNVBanHang.Size = new System.Drawing.Size(299, 30);
-            this.lbTenNVBanHang.TabIndex = 5;
-            this.lbTenNVBanHang.Text = "Tên nhân viên bán hàng";
-            this.lbTenNVBanHang.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnDangXuat
-            // 
-            this.btnDangXuat.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDangXuat.FlatAppearance.BorderSize = 0;
-            this.btnDangXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDangXuat.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnDangXuat.Image = ((System.Drawing.Image)(resources.GetObject("btnDangXuat.Image")));
-            this.btnDangXuat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDangXuat.Location = new System.Drawing.Point(0, 916);
-            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(2);
-            this.btnDangXuat.Name = "btnDangXuat";
-            this.btnDangXuat.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnDangXuat.Size = new System.Drawing.Size(258, 76);
-            this.btnDangXuat.TabIndex = 10;
-            this.btnDangXuat.Text = " Đăng xuất";
-            this.btnDangXuat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDangXuat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDangXuat.UseVisualStyleBackColor = true;
-            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
             // Home
             // 

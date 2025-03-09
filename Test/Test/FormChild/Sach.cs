@@ -13,56 +13,26 @@ namespace Test.FormChild
 {
     public partial class Sach : Form
     {
-        public Sach()
+        private string maNV = "";
+        public Sach(string maNVBanHang)
         {
             InitializeComponent();
+            maNV = maNVBanHang;
         }
 
         ConnectionSQL connectionSQL = new ConnectionSQL();
 
 
-        public void SetPlaceholder(TextBox textBox, string placeholder)
-        {
-            textBox.Text = placeholder;
-            textBox.ForeColor = Color.Gray;
-
-            textBox.Enter += (s, e) =>
-            {
-                if (textBox.Text == placeholder)
-                {
-                    textBox.Text = "";
-                    textBox.ForeColor = Color.Black;
-                }
-            };
-
-            textBox.Leave += (s, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    textBox.Text = placeholder;
-                    textBox.ForeColor = Color.Gray;
-                }
-            };
-        }
-
-        public void canChinhDGV(DataGridView dataGridView)
-        {
-            dataGridView.AllowUserToAddRows = false;
-            dataGridView.RowHeadersVisible = false;
-            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView.DefaultCellStyle.Font = new Font("Cascadia Code", 12, FontStyle.Bold);
-            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Cascadia Code", 12, FontStyle.Bold);
-        }
-
         private void Sach_Load(object sender, EventArgs e)
         {
             cbbTimKiem.Text = "Tên sách";
+            Function function = new Function();
 
             // Load data sách
             loadDataSach();
 
             // Căn chỉnh table
-            canChinhDGV(dgvSach);
+            function.CanChinhDGV(dgvSach);
             dgvSach.Columns["Tên sách"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
@@ -174,6 +144,12 @@ namespace Test.FormChild
         {
             try
             {
+                if (maNV != "NV001")
+                {
+                    MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Kiểm tra rỗng
                 string maSanPham = txtMaSach.Text.Trim();
 
@@ -210,6 +186,12 @@ namespace Test.FormChild
         {
             try
             {
+                if (maNV != "NV001")
+                {
+                    MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string maSP = txtMaSach.Text.Trim();
 
                 if (string.IsNullOrEmpty(maSP))

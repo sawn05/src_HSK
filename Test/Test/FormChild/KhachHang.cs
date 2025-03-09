@@ -102,7 +102,7 @@ namespace Test.FormChild
         {
             cbbTimKiem.Text = " Mã khách hàng";
 
-            FormChild.Sach frmSach = new FormChild.Sach();
+            Function frmSach = new Function();
             frmSach.SetPlaceholder(txtTimKiem, " Nhập từ khóa....");
 
             loadDataKH();
@@ -110,7 +110,7 @@ namespace Test.FormChild
             labelKQTimKiem.Text = "Kết quả tìm thấy: 0";
 
             // Căn chỉnh table
-            frmSach.canChinhDGV(dgvKhachHang);
+            frmSach.CanChinhDGV(dgvKhachHang);
             dgvKhachHang.Columns["Tên khách hàng"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 

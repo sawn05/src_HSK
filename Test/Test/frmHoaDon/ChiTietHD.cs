@@ -83,8 +83,8 @@ namespace Test.frmHoaDon
 
         private void ChiTietHD_Load(object sender, EventArgs e)
         {
-            FormChild.Sach frmSach = new FormChild.Sach();
-            frmSach.canChinhDGV(dgvSanPham);
+            Function frmSach = new Function();
+            frmSach.CanChinhDGV(dgvSanPham);
             dgvSanPham.Columns["Tên sản phẩm"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSanPham.Columns["Mã sản phẩm"].Width = 150;
             dgvSanPham.Columns["SL mua"].Width = 55;

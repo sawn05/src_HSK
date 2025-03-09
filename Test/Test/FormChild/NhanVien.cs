@@ -106,12 +106,12 @@ namespace Test.FormChild
         {
             loadDataNV();
 
-            FormChild.Sach frmSach = new FormChild.Sach();
+            Function frmSach = new Function();
 
             cbbChucDanh.Text = "Quản lý";
 
             // Căn chỉnh table
-            frmSach.canChinhDGV(dgvNhanVien);
+            frmSach.CanChinhDGV(dgvNhanVien);
             dgvNhanVien.Columns["Tên nhân viên"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 

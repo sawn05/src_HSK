@@ -13,17 +13,19 @@ namespace Test.FormChild
 {
     public partial class DungCuHocTap : Form
     {
-        public DungCuHocTap()
+        private string getMaNVBanHang = "";
+        public DungCuHocTap(string maNVBanHang)
         {
             InitializeComponent();
+            getMaNVBanHang = maNVBanHang;
         }
 
         ConnectionSQL connectionSQL = new ConnectionSQL();
 
         private void DungCuHocTap_Load(object sender, EventArgs e)
         {
-            FormChild.Sach frmSach = new FormChild.Sach();
-            //frmSach.SetPlaceholder(txtTimKiem, " Nhập từ khóa....");
+            Function function = new Function();
+            function.SetPlaceholder(txtTimKiem, " Nhập từ khóa....");
 
             cbbTimKiem.Text = "Tên dụng cụ";
 
@@ -31,8 +33,9 @@ namespace Test.FormChild
             loadDataDCHT();
 
             // Căn chỉnh table
-            frmSach.canChinhDGV(dgvDCHT);
+            function.CanChinhDGV(dgvDCHT);
             dgvDCHT.Columns["Tên dụng cụ"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
         }
 
         // Load table Sách
@@ -142,6 +145,12 @@ namespace Test.FormChild
         {
             try
             {
+                if (getMaNVBanHang != "NV001")
+                {
+                    MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Kiểm tra rỗng
                 string maSanPham = txtMaDungCu.Text.Trim();
 
@@ -178,6 +187,12 @@ namespace Test.FormChild
         {
             try
             {
+                if (getMaNVBanHang != "NV001")
+                {
+                    MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string maSP = txtMaDungCu.Text.Trim();
 
                 if (string.IsNullOrEmpty(maSP))

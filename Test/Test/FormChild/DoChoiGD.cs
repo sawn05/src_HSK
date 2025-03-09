@@ -13,9 +13,11 @@ namespace Test.FormChild
 {
     public partial class DoChoiGD : Form
     {
-        public DoChoiGD()
+        private string getMaNVBanHang = "";
+        public DoChoiGD(string maNVBanHang)
         {
             InitializeComponent();
+            getMaNVBanHang = maNVBanHang;
         }
 
         ConnectionSQL connectionSQL = new ConnectionSQL();
@@ -23,7 +25,7 @@ namespace Test.FormChild
 
         private void DoChoiGD_Load(object sender, EventArgs e)
         {
-            FormChild.Sach frmSach = new FormChild.Sach();
+            Function function = new Function();
 
             cbbTimKiem.Text = "Tên sản phẩm";
 
@@ -31,7 +33,7 @@ namespace Test.FormChild
             loadDataDoChoi();
 
             // Căn chỉnh table
-            frmSach.canChinhDGV(dgvDoChoi);
+            function.CanChinhDGV(dgvDoChoi);
             dgvDoChoi.Columns["Tên sản phẩm"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
@@ -145,6 +147,12 @@ namespace Test.FormChild
         {
             try
             {
+                if (getMaNVBanHang != "NV001")
+                {
+                    MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Kiểm tra rỗng
                 string maSanPham = txtMaDoChoi.Text.Trim();
 
@@ -181,6 +189,12 @@ namespace Test.FormChild
         {
             try
             {
+                if (getMaNVBanHang != "NV001")
+                {
+                    MessageBox.Show("Bạn phải được cấp quyền này!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string maSP = txtMaDoChoi.Text.Trim();
 
                 if (string.IsNullOrEmpty(maSP))

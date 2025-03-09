@@ -13,7 +13,7 @@ namespace Test
     public partial class Home : Form
     {
         private Form activeForm = null;
-        private static string maNvBanHang = "";
+        private string maNvBanHang = "";
 
         public Home(string tenNV, string maNhanVien)
         {
@@ -154,7 +154,7 @@ namespace Test
             ResetButtonColors();
             btnDanhMuc.BackColor = Color.FromArgb(156, 197, 199);
             lbTitle.Text = "Sách";
-            OpenChildForm(new FormChild.Sach());
+            OpenChildForm(new FormChild.Sach(maNvBanHang));
         }
 
 
@@ -163,7 +163,7 @@ namespace Test
             ResetButtonColors();
             btnDanhMuc.BackColor = Color.FromArgb(156, 197, 199);
             lbTitle.Text = "Tạp chí và báo";
-            OpenChildForm(new FormChild.TCVB());
+            OpenChildForm(new FormChild.TCVB(maNvBanHang));
         }
 
         private void btnTruyen_Click(object sender, EventArgs e)
@@ -171,7 +171,7 @@ namespace Test
             ResetButtonColors();
             btnDanhMuc.BackColor = Color.FromArgb(156, 197, 199);
             lbTitle.Text = "Truyện";
-            OpenChildForm(new FormChild.Truyen());
+            OpenChildForm(new FormChild.Truyen(maNvBanHang));
         }
 
         private void btnDCGD_Click(object sender, EventArgs e)
@@ -179,7 +179,7 @@ namespace Test
             ResetButtonColors();
             btnDanhMuc.BackColor = Color.FromArgb(156, 197, 199);
             lbTitle.Text = "Đồ chơi giáo dục";
-            OpenChildForm(new FormChild.DoChoiGD());
+            OpenChildForm(new FormChild.DoChoiGD(maNvBanHang));
         }
 
         private void btnDCHT_Click(object sender, EventArgs e)
@@ -187,7 +187,7 @@ namespace Test
             ResetButtonColors();
             btnDanhMuc.BackColor = Color.FromArgb(156, 197, 199);
             lbTitle.Text = "Dụng cụ học tập";
-            OpenChildForm(new FormChild.DungCuHocTap());
+            OpenChildForm(new FormChild.DungCuHocTap(maNvBanHang));
         }
 
         private void btnTBCongNghe_Click(object sender, EventArgs e)
@@ -195,7 +195,7 @@ namespace Test
             ResetButtonColors();
             btnDanhMuc.BackColor = Color.FromArgb(156, 197, 199);
             lbTitle.Text = "Thiết bị công nghệ";
-            OpenChildForm(new FormChild.TBCN());
+            OpenChildForm(new FormChild.TBCN(maNvBanHang));
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -254,7 +254,7 @@ namespace Test
             lbTitle.Text = "Danh sách hóa đơn";
             ResetButtonColors();
             btnTKHoaDon.BackColor = Color.FromArgb(156, 197, 199);
-            OpenChildForm(new FormChild.ThongKeHD());
+            OpenChildForm(new FormChild.ThongKeHD(maNvBanHang));
         }
 
         private void btnDangXuat_Click(object sender, EventArgs e)
