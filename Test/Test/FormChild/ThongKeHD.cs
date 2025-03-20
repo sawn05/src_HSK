@@ -33,7 +33,9 @@ namespace Test.FormChild
             frmSach.CanChinhDGV(dgvHoaDon);
             dgvHoaDon.Columns["Ngày lập"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvHoaDon.Columns["Tổng tiền"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvHoaDon.Columns["Ghi chú"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvHoaDon.Columns["Ghi chú"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvHoaDon.Columns["Khách hàng"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvHoaDon.Columns["Nhân viên"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             // Load doanh thu
             lbTongDoanhThu.Text = "Tổng doanh thu của cửa hàng: " + tongDoanhThu_ToString() + " VND";
@@ -42,17 +44,20 @@ namespace Test.FormChild
 
         private void loadDataHD()
         {
-            string sqlHD = "Select " +
-                "maHD AS [Mã HĐ]," +
-                "maKhachHang AS [Mã KH]," +
-                "maNhanVien AS [Mã NV]," +
-                "ngayLapHD AS [Ngày lập]," +
-                "tongTien AS [Tổng tiền]," +
-                "phuongThucTT AS [Phương thức thanh toán]," +
-                "ghiChu AS [Ghi chú]" +
-                " from HoaDon";
+            string sqlHD = "SELECT " +
+                    "hd.maHD AS [Mã HĐ], " +
+                    "kh.tenKhachHang AS [Khách hàng], " +
+                    "nv.tenNhanVien AS [Nhân viên], " +
+                    "hd.ngayLapHD AS [Ngày lập], " +
+                    "hd.tongTien AS [Tổng tiền], " +
+                    "hd.phuongThucTT AS [Phương thức thanh toán], " +
+                    "hd.ghiChu AS [Ghi chú] " +
+                    "FROM HoaDon hd " +
+                    "JOIN KhachHang kh ON hd.maKhachHang = kh.maKhachHang " +
+                    "JOIN NhanVien nv ON hd.maNhanVien = nv.maNhanVien";
 
             dgvHoaDon.DataSource = connectionSQL.hienDL(sqlHD);
+
         }
 
         private void dgvHoaDon_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -76,15 +81,17 @@ namespace Test.FormChild
             }
             else
             {
-                string sqlHD = "Select " +
-                "maHD AS [Mã HĐ]," +
-                "maKhachHang AS [Mã KH]," +
-                "maNhanVien AS [Mã NV]," +
-                "ngayLapHD AS [Ngày lập]," +
-                "tongTien AS [Tổng tiền]," +
-                "phuongThucTT AS [Phương thức thanh toán]," +
-                "ghiChu AS [Ghi chú]" +
-                " from HoaDon Where maHD LIKE N'%" + txtTimKiem.Text.Trim() + "%'";
+                string sqlHD = "SELECT " +
+                    "hd.maHD AS [Mã HĐ], " +
+                    "kh.tenKhachHang AS [Khách hàng], " +
+                    "nv.tenNhanVien AS [Nhân viên], " +
+                    "hd.ngayLapHD AS [Ngày lập], " +
+                    "hd.tongTien AS [Tổng tiền], " +
+                    "hd.phuongThucTT AS [Phương thức thanh toán], " +
+                    "hd.ghiChu AS [Ghi chú] " +
+                    "FROM HoaDon hd " +
+                    "JOIN KhachHang kh ON hd.maKhachHang = kh.maKhachHang " +
+                    "JOIN NhanVien nv ON hd.maNhanVien = nv.maNhanVien WHERE maHD LIKE N'%" + txtTimKiem.Text.Trim() + "%'";
 
                 dgvHoaDon.DataSource = connectionSQL.hienDL(sqlHD);
             }
@@ -182,29 +189,31 @@ namespace Test.FormChild
 
         private string getKhachHang()
         {
-            string maKH = "";
             if (dgvHoaDon.CurrentRow != null)
             {
-                maKH = dgvHoaDon.CurrentRow.Cells[1].Value?.ToString() ?? "";
+                return dgvHoaDon.CurrentRow.Cells[1].Value?.ToString() ?? "";
             }
+            return "";
+        }
 
-            string sqlTenKH = "SELECT tenKhachHang FROM KhachHang WHERE maKhachHang = @maKH";
+        private string getMaKH(string maHD)
+        {
+            string sqlLayMaKH = "SELECT maKhachHang FROM HoaDon WHERE maHD = @maHD";
+
             try
             {
                 connectionSQL.open();
-
-                using (SqlCommand cmd = new SqlCommand(sqlTenKH, connectionSQL.conn))
+                using (SqlCommand cmd = new SqlCommand(sqlLayMaKH, connectionSQL.conn))
                 {
-                    cmd.Parameters.AddWithValue("@maKH", maKH);
-
+                    cmd.Parameters.AddWithValue("@maHD", maHD);
                     object result = cmd.ExecuteScalar();
                     return result?.ToString() ?? "";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return "0";
+                MessageBox.Show("Lỗi lấy mã khách hàng: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
             }
             finally
             {
@@ -213,30 +222,28 @@ namespace Test.FormChild
         }
 
 
-        private string getSDT()
+        private string getSDT(string maKH)
         {
-            string maKH = "";
-            if (dgvHoaDon.CurrentRow != null)
+            if (string.IsNullOrEmpty(maKH))
             {
-                maKH = dgvHoaDon.CurrentRow.Cells[1].Value?.ToString() ?? "";
+                MessageBox.Show("Không tìm thấy mã khách hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return "0";
             }
 
             string sqlTenKH = "SELECT soDienThoai FROM KhachHang WHERE maKhachHang = @maKH";
             try
             {
                 connectionSQL.open();
-
                 using (SqlCommand cmd = new SqlCommand(sqlTenKH, connectionSQL.conn))
                 {
                     cmd.Parameters.AddWithValue("@maKH", maKH);
-
                     object result = cmd.ExecuteScalar();
                     return result?.ToString() ?? "";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi lấy số điện thoại: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "0";
             }
             finally
@@ -245,12 +252,13 @@ namespace Test.FormChild
             }
         }
 
-        private string getDiaChi()
+
+        private string getDiaChi(string maKH)
         {
-            string maKH = "";
-            if (dgvHoaDon.CurrentRow != null)
+            if (string.IsNullOrEmpty(maKH))
             {
-                maKH = dgvHoaDon.CurrentRow.Cells[1].Value?.ToString() ?? "";
+                MessageBox.Show("Không tìm thấy mã khách hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return "0";
             }
 
             string sqlTenKH = "SELECT diaChi FROM KhachHang WHERE maKhachHang = @maKH";
@@ -301,8 +309,9 @@ namespace Test.FormChild
             string maHD = getMaHD();
             string ngayLap = getNgayLap();
             string khachHang = getKhachHang();
-            string soDienThoai = getSDT();
-            string diaChi = getDiaChi();
+            string maKH = getMaKH(maHD);
+            string soDienThoai = getSDT(maKH);
+            string diaChi = getDiaChi(maKH);
             string phuongThucTT = getPTTT();
             string ghiChu = getGhiChu();
 
